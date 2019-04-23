@@ -1,52 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using Spine;
-using BinToJson;
 using System.IO;
 using System.Web.Script.Serialization;
+using Spine;
+using BinToJson;
 
-namespace ConsoleApp1
+namespace BIN2JSON
 {
     class Program
     {
+        // Change It as the Char Name.
+        private static string _BoneName = "22";
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World");
+            Console.WriteLine("Spine Binary to Json Start.");
 
             TextureLoader textureLoader = new DemoLoader();
-            Atlas atlas = new Atlas("22.atlas",textureLoader);
+            Atlas atlas = new Atlas(_BoneName + ".atlas", textureLoader);
             AtlasAttachmentLoader attachmentLoader = new AtlasAttachmentLoader(atlas);
-            SkeletonJson skeletonJson = new SkeletonJson(attachmentLoader);
             SkeletonBinary skeletonBinary = new SkeletonBinary(attachmentLoader);
-            //SkeletonData skeletonData = json.readSkeletonData("mySkeleton.json");
-            SkeletonData skeletonData = skeletonBinary.ReadSkeletonData("22.skel");
-            Console.WriteLine(skeletonData.Version);
-            Console.WriteLine(skeletonData.Name);
-            Console.WriteLine(skeletonData.FindAnimation("attack").Name);
+            SkeletonData skeletonData = skeletonBinary.ReadSkeletonData(_BoneName + ".skel");
 
-            #region JSON
-            //Takes the skeletonData and converts it into a serializable object
+            // Test the SkelData.
+            Console.WriteLine("The spine version: \t" + skeletonData.Version);
+            Console.WriteLine("The bones name: \t" + skeletonData.Name);
+            Console.WriteLine("Find the Animation: \t" + skeletonData.FindAnimation("attack").Name);
+
+            #region JSON File Create
+            // Takes the skeletonData and converts it into a serializable object
             Dictionary<string, object> jsonFile = SkelDataConverter.FromSkeletonData(skeletonData);
 
             //convert object to json string for storing
             JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
             string json = jsonSerializer.Serialize(jsonFile);
-
-
-            //Output file to same directory as input with "name 1", does not allow overwrites
-            //string preExtension = fileName.Substring(0, fileName.LastIndexOf('.'));
-            //int addNum = 1;
-            //string fullerName = preExtension;
-            //while (File.Exists(fullerName + ".json"))
-            //{
-            //    fullerName = preExtension + " " + addNum;
-            //    addNum++;
-            //}
-            File.WriteAllText("22.json", json);
+            File.WriteAllText(_BoneName + ".json", json);
             #endregion
+            Console.WriteLine("Json File Create Successfully.");
+            Console.ReadKey();
         }
     }
 
+    // False Class
     class DemoLoader : TextureLoader
     {
         public void Load(AtlasPage page, string path)

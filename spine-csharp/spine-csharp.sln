@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spine-csharp", "spine-csharp.csproj", "{94144E22-2431-4A8F-AC04-DEC22F7EDD8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "..\ConsoleApp1\ConsoleApp1.csproj", "{7E2A7E74-8D16-4C0C-B0BF-F71A7BEB653D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bin2JSON", "..\ConsoleApp1\Bin2JSON.csproj", "{7E2A7E74-8D16-4C0C-B0BF-F71A7BEB653D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
