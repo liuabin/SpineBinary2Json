@@ -14,13 +14,35 @@ namespace BIN2JSON
 
         static void Main(string[] args)
         {
+            #region Copy With Args
             Console.WriteLine("Spine Binary to Json Start.");
+            if(args.Length > 0)
+            {
+                _BoneName = args[0];
+                Console.WriteLine(args[0]);
+            }
+            else
+            {
+                Console.WriteLine("Default: 22 ");
+            }
+            Console.ReadKey();
+            #endregion
 
-            TextureLoader textureLoader = new DemoLoader();
-            Atlas atlas = new Atlas(_BoneName + ".atlas", textureLoader);
-            AtlasAttachmentLoader attachmentLoader = new AtlasAttachmentLoader(atlas);
-            SkeletonBinary skeletonBinary = new SkeletonBinary(attachmentLoader);
-            SkeletonData skeletonData = skeletonBinary.ReadSkeletonData(_BoneName + ".skel");
+            // Creat SkelData
+            SkeletonData skeletonData;
+            try
+            {
+                TextureLoader textureLoader = new DemoLoader();
+                Atlas atlas = new Atlas(_BoneName + ".atlas", textureLoader);
+                AtlasAttachmentLoader attachmentLoader = new AtlasAttachmentLoader(atlas);
+                SkeletonBinary skeletonBinary = new SkeletonBinary(attachmentLoader);
+                skeletonData = skeletonBinary.ReadSkeletonData(_BoneName + ".skel");
+            }catch (Exception)
+            {
+                Console.WriteLine("File Read Error.");
+                Console.ReadKey();
+                return;
+            }
 
             // Test the SkelData.
             Console.WriteLine("The spine version: \t" + skeletonData.Version);

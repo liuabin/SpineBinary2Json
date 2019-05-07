@@ -3,8 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BinToJson
 {
@@ -42,6 +40,7 @@ namespace BinToJson
                 bm["scaleY"] = data.ScaleY;
                 bm["shearX"] = data.ShearX;
                 bm["shearY"] = data.ShearY;
+                // Likely is aborlished,
                 //bm["inheritRotation"] = data.InheritRotation;
                 //bm["inheritScale"] = data.InheritScale;
 
@@ -274,8 +273,6 @@ namespace BinToJson
             Dictionary<string, Dictionary<string, Dictionary<string, List<object>>>> deform = new Dictionary<string, Dictionary<string, Dictionary<string, List<object>>>>();
             List<Dictionary<string, object>> drawOrder = new List<Dictionary<string, object>>();
 
-
-
             List<object> tl;
             Dictionary<string, object> tmp;
 
@@ -477,7 +474,6 @@ namespace BinToJson
             //if (curve == null) //no curve this frame
             //    return;
             //map["curve"] = curve;
-            //Console.WriteLine("No curve need");
             return;
         }
         private static List<Object> applyTimeline(float[] frames, Action<MyNumerator<float>, Dictionary<string, object>> action) {
